@@ -1,0 +1,26 @@
+<div class="ibox-title"><h5>Results</h5></div>
+<div class="ibox-content">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>رمز المقرر</th>
+                <th>اسم المقرر</th>
+                <th>أعمال السنة</th>
+                <th>الامتحان النهائي</th>
+                <th>المجموع</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="enrolment in results.enrolments">
+                <td>{{$index+1}}</td>
+                <td>{{ enrolment.course.code }}</td>
+                <td>{{ enrolment.course.name }}</td>
+                <td>{{ enrolment.carry_marks }}</td>
+                <td>{{ enrolment.final_exam }}</td>
+                <td>{{ enrolment.grade }}</td>
+            </tr>
+        </tbody>
+    </table>
+     <!-- | filter:results.stats.student_registration.student_registration_id" -->
+</div>

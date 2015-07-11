@@ -1,0 +1,17 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <select ng-model="course" ng-options="c.courseCode for c in enrolment.periodCourseSections"></select>
+            <select ng-model="MainSection" ng-options="section.group for section in course.MainSections[0].sections"></select>
+            <h2>
+                {{MainSection.group}}
+            </h2>
+            <div ng-repeat="SecondarySections in course.SecondarySections">
+                <select ng-model="SecondarySections.name" ng-options="section.group for section in SecondarySections.sections"></select>
+                {{SecondarySections.name.group}}
+            </div>
+            </br>
+            <a href="" ng-click="enrolment.enrol(MainSection.section_id)">Enrol</a>
+        </div>
+    </div>
+</div>

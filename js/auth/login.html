@@ -1,0 +1,26 @@
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">pX</h1>
+
+            </div>
+            <h3>Welcome to projectX (that's what the above logo is supposed to mean!)</h3>
+            <p>Due to the lack of creativity, no name has been given yet,
+                so let's call it <it>x</it>, a typical thing for an
+                engineer to do!  Besides, the project is still in beta
+                stage.  Final note, why on earth do human beings use <it>x</it>. As an engineer you must be interested to know why, see this<a href=http://www.ted.com/talks/terry_moore_why_is_x_the_unknown?language=ar> video</a>
+            </p>
+            <p>Login in..</p>
+            <form class="m-t" role="form" action="#">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" required="" ng-model='auth.user.email'>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required="" ng-model='auth.user.password'>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b" ng-click="auth.login()">Login</button>
+            </form>
+            <p class="m-t"> <small>ProjectX, an attempt at producing a simple student information system, for the fun of it!</small> </p>
+        </div>
+    </div>
