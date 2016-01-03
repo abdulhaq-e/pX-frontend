@@ -3,108 +3,112 @@
 <!-- * Version 1.9 -->
 <!-- * -->
 
-
 <!DOCTYPE html>
 <html ng-app="pX">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Page title set in pageTitle directive -->
-    <title page-title></title>
+        <!-- Page title set in pageTitle directive -->
+        <title page-title></title>
 
-    <!-- Font awesome -->
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+        <!-- Font awesome -->
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <!-- Bootstrap and Fonts -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Main Inspinia CSS files -->
-    <link href="css/animate.css" rel="stylesheet">
-    <link id="loadBefore" href="css/style.css" rel="stylesheet">
-
-    <!-- Needed for HTML5-mode navigation -->
-    <!--><base href="/">-->
-
-</head>
-
-<!-- ControllerAs syntax -->
-<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
-<body class="skin-2 boxed-layout">
-
-<!-- Main view  -->
-    <div>
-        <div ui-view ></div>
-    </div>
+        <!-- Bootstrap and Fonts -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/plugins/bootstrap-rtl/bootstrap-rtl.min.css" rel="stylesheet">
 
 
-<!-- jQuery and Bootstrap -->
-<script src="js/jquery/jquery-2.1.1.min.js"></script>
-<script src="js/plugins/jquery-ui/jquery-ui.js"></script>
-<script src="js/bootstrap/bootstrap.min.js"></script>
+        <!-- Main Inspinia CSS files --->
+        <link href="css/animate.css" rel="stylesheet">
+        <link id="loadBefore" href="css/style.css" rel="stylesheet">
 
+        <!-- Needed for HTML5-mode navigation --->
+        <!-- <base href="/"> -->
 
+    </head>
 
-<!-- MetsiMenu -->
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <!-- ControllerAs syntax -->
+    <!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+    <body class="skin-2 boxed-layout rtls">
 
-<!-- SlimScroll -->
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <!-- Main view -->
+        <div>
+            <div ui-view ></div>
+        </div>
 
-<!-- Peace JS -->
-<script src="js/plugins/pace/pace.min.js"></script>
+        <!-- jQuery and Bootstrap -->
+        <script src="js/jquery/jquery-2.1.1.min.js"></script>
+        <script src="js/plugins/jquery-ui/jquery-ui.js"></script>
+        <script src="js/bootstrap/bootstrap.min.js"></script>
 
-<!-- Custom and plugin javascript -->
-<script src="js/inspinia.js"></script>
+        <!-- MetsiMenu -->
+        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-<!-- Main Angular scripts-->
-<script src="js/angular/angular.min.js"></script>
-<script src="js/angular/angular-touch.min.js"></script>
-<script src="js/ui-router/angular-ui-router.min.js"></script>
-<script src="js/plugins/oclazyload/ocLazyLoad.min.js"></script>
-<script src="js/plugins/lodash/lodash.js"></script>
-<script src="js/plugins/restangular/restangular.js"></script>
-<script src="js/plugins/angular-storage/angular-storage.js"></script>
-<script src="js/plugins/angular-jwt/angular-jwt.js"></script>
-<script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- Anglar App Script -->
-<script src="js/pX.js"></script>
-<script src="js/pX.config.js"></script>
+        <!-- Peace JS -->
+        <script src="js/plugins/pace/pace.min.js"></script>
 
-<script src="js/api/api.module.js"></script>
-<script src="js/api/api.config.js"></script>
-<script src="js/api/api.services.js"></script>
-<script src="js/api/api.results-service.js"></script>
-<script src="js/api/api.progress-service.js"></script>
-<script src="js/api/api.enrolments-service.js"></script>
+        <!-- Custom and plugin javascript -->
+        <script src="js/inspinia.js"></script>
 
-<script src="js/main/tempResults/tempResults.module.js"></script>
-<script src="js/main/tempResults/tempResults.controller.js"></script>
-<script src="js/main/tempResults/tempResults.directive.js"></script>
-<script src="js/main/tempResults/tempResults.routes.js"></script>
+        <!-- Main Angular scripts-->
+        <script src="js/angular/angular.min.js"></script>
+        <script src="js/angular/angular-touch.min.js"></script>
+        <script src="js/ui-router/angular-ui-router.min.js"></script>
+        <script src="js/plugins/oclazyload/ocLazyLoad.min.js"></script>
+        <!-- <script src="js/plugins/lodash/lodash.js"></script> -->
+        <!-- <script src="js/plugins/restangular/restangular.js"></script> -->
+        <script src="js/plugins/angular-storage/angular-storage.js"></script>
+        <script src="js/plugins/angular-jwt/angular-jwt.js"></script>
+        <script src="js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+        <script src="js/bower_components/orbit.js/orbit.js"></script>
+        <script src="js/bower_components/orbit.js/orbit-common.js"></script>
+        <script src="js/bower_components/orbit.js/orbit-common-jsonapi.js"></script>
+        <script src="js/bower_components/orbit.js/orbit-common-local-storage.js"></script>
 
-<!-- <script src="js/auth/auth.module.js"></script> -->
-<!-- <script src="js/auth/auth.service.js"></script> -->
-<!-- <script src="js/auth/auth.routes.js"></script> -->
-<!-- <script src="js/auth/auth.controller.js"></script> -->
+        <!-- <\!-- Anglar App Script -\-> -->
+        <script src="js/api/api.config.js"></script>
+        <script src="js/pX.js"></script>
+        <script src="js/pX.config.js"></script>
 
-<!-- <script src="js/main/main.module.js"></script> -->
-<!-- <script src="js/main/main.service.js"></script> -->
-<!-- <script src="js/main/progress.controller.js"></script> -->
-<!-- <script src="js/main/enrolment/enrolment.controller.js"></script> -->
-<!-- <script src="js/main/results.controller.js"></script> -->
-<!-- <script src="js/main/main.controller.js"></script> -->
-<!-- <script src="js/main/employee/employee.module.js"></script> -->
-<!-- <script src="js/main/employee/courses.controller.js"></script> -->
-<!-- <script src="js/main/main.routes.js"></script> -->
-<!-- <script src="js/main/results.directive.js"></script> -->
-<!-- <script src="js/main/iboxTools.directive.js"></script> -->
-<!-- <script src="js/main/minimalizeSidebar.directive.js"></script> -->
-<!-- <script src="js/main/pageTitle.directive.js"></script> -->
-<!-- <script src="js/main/sideNavigation.directive.js"></script> -->
+        <script src="js/api/api.module.js"></script>
+        <script src="js/api/api.services.js"></script>
+        <script src="js/api/api.results-service.js"></script>
+        <!-- <script src="js/api/api.progress-service.js"></script> -->
+        <!-- <script src="js/api/api.enrolments-service.js"></script> -->
 
-</body>
+        <!-- <script src="js/main/tempResults/tempResults.module.js"></script> -->
+        <!-- <script src="js/main/tempResults/tempResults.controller.js"></script> -->
+        <!-- <script src="js/main/tempResults/tempResults.directive.js"></script> -->
+        <!-- <script src="js/main/tempResults/tempResults.routes.js"></script> -->
+
+        <!-- <script src="js/auth/auth.module.js"></script> -->
+        <!-- <script src="js/auth/auth.service.js"></script> -->
+        <!-- <script src="js/auth/auth.routes.js"></script> -->
+        <!-- <script src="js/auth/auth.controller.js"></script> -->
+
+        <script src="js/main/main.module.js"></script>
+        <script src="js/main/main.service.js"></script>
+        <script src="js/main/main.routes.js"></script>
+        <script src="js/main/main.controller.js"></script>
+        <!-- <script src="js/main/progress.controller.js"></script> -->
+        <!-- <script src="js/main/enrolment/enrolments.controller.js"></script> -->
+        <script src="js/main/results.controller.js"></script>
+        <script src="js/enrolments/enrolments.controller.js"></script>
+
+        <!-- <script src="js/main/employee/employee.module.js"></script> -->
+        <!-- <script src="js/main/employee/courses.controller.js"></script> -->
+
+        <script src="js/main/results.directive.js"></script>
+        <script src="js/main/iboxTools.directive.js"></script>
+        <script src="js/main/minimalizeSidebar.directive.js"></script>
+        <script src="js/main/sideNavigation.directive.js"></script>
+
+    </body>
 </html>

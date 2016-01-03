@@ -1,9 +1,10 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-
     <div class="ibox float-e-margins">
-      <select chosen disable-search="true" ng-options="results.student_registration.period for results in results.results track by results.student_registration.student_registration_id" ng-model="results.stats" class="chosen-select" style="width:200px;">
-      </select>
-      <div results>
-      </div>
+    <select chosen disable-search="true" ng-options="studentRegistration as studentRegistration.period for studentRegistration in results.studentRegistrations" ng-model="results.selectedStudentRegistration" class="chosen-select chosen-rtl" style="width:200px;">
+    </select>
+    <div results>
+        </div>
     </div>
 </div>
+
+<!-- for results in results.results track by results.student_registration.student_registration_id" -->

@@ -1,34 +1,34 @@
 <div class="ibox-title ">
-    <h5>Registration Status: {{results.stats.student_registration.registration_type}}
+    <h5>حالة التسجيل: {{results.selectedStudentRegistration.registrationType}}
 </div>
-<div class="ibox-title"><h5>Results</h5></div>
+<div class="ibox-title"><h5>النتائج</h5></div>
 <div class="ibox-content">
     <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Course Code</th>
-                <th>Course Name</th>
-                <th>Group</th>
-                <th>Credits</th>
-                <th>Grade</th>
-                <th>Repeated</th>
+                <th>رمز المقرر</th>
+                <th>اسم المقرر</th>
+                <th>المجموعة</th>
+                <th>الوحدات</th>
+                <th>الدرجة</th>
+                <!-- <th>Repeated</th> -->
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="enrolment in results.enrolments | filter:results.stats.student_registration.student_registration_id">
+            <tr ng-repeat="enrolment in results.enrolments | filter:{__rel: {'student-registration': results.selectedStudentRegistration.id}}">
                 <td>{{$index+1}}</td>
-                <td>{{ enrolment.course.code }}</td>
-                <td>{{ enrolment.course.name }}</td>
+                <td>{{(results.courses | filter:{id: enrolment.__rel.course})[0].code}}</td>
+                <td>{{(results.courses | filter:{id: enrolment.__rel.course})[0].name }}</td>
                 <td>{{ enrolment.group }}</td>
-                <td>{{ enrolment.course.credit }}</td>
+                <td>{{ (results.courses | filter:{id: enrolment.__rel.course})[0].credit }}</td>
                 <td>{{ enrolment.grade }}</td>
-                <td>{{ enrolment.repeated }}</td>
+                <!-- <td>{{ enrolment.repeated }}</td> -->
             </tr>
         </tbody>
     </table>
 </div>
-<div class="ibox-title"><h5>Statistics</h5></div>
+<div class="ibox-title"><h5>الإحصائيات</h5></div>
 
 <div class="ibox-content">
 
@@ -36,38 +36,38 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Term</th>
-                <th>Cumulative</th>
+                <th>الفصلية</th>
+                <th>التراكمية</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td> Registered Credits</td>
+                <td> الوحدات المسجلة</td>
                 <td> {{results.stats.registered_credits}}</td>
                 <td> {{results.stats.cumulative_registered_credits}} </td>
             </tr>
             <tr>
-                <td> Passed Credits</td>
+                <td> الوحدات المنجزة</td>
                 <td> {{results.stats.passed_credits}}</td>
                 <td> {{results.stats.cumulative_passed_credits}} </td>
             </tr>
             <tr>
-                <td> Scored Points:</td>
+                <td> النقاط</td>
                 <td> {{results.stats.scored_points}}</td>
                 <td> {{results.stats.cumulative_scored_points}} </td>
             </tr>
             <tr>
-                <td> Repeated Credits:</td>
+                <td> الوحدات المعادة</td>
                 <td> {{results.stats.repeated_credits}}</td>
                 <td> - </td>
             </tr>
             <tr>
-                <td> Reapeated Points:</td>
+                <td> النقاط المعادة</td>
                 <td> {{results.stats.repeated_points}}</td>
                 <td> - </td>
             </tr>
             <tr>
-                <td> GPA:</td>
+                <td> المعدل</td>
                 <td> {{results.stats.GPA}}%</td>
                 <td> {{results.stats.cumulative_GPA}}% </td>
             </tr>

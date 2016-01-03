@@ -53,6 +53,14 @@
                 empty = false;
                 initOrUpdate = function() {
                     if (chosen) {
+
+
+
+
+
+
+
+
                         return element.trigger('chosen:updated');
                     } else {
                         chosen = element.chosen(options).data('chosen');

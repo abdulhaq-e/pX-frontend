@@ -36,7 +36,7 @@
             templateUrl: "views/home.html",
             data: {
                 pageTitle: 'Home view',
-                requiresLogin: true}
+                requiresLogin: false}
         };
 
         var results = {
@@ -46,12 +46,13 @@
             controller: 'ResultsController',
             controllerAs: 'results',
             templateUrl: "views/results.html",
-            data: { pageTitle: 'Results',
-                    requiresLogin: true},
+            data: { pageTitle: 'النتائج',
+                    requiresLogin: false},
             resolve: {
-                //ResultsService: ResultsService,
                 getEnrolmentsService: getEnrolmentsService,
-                getResultsService: getResultsService,
+                getStudentRegistrationsService: getStudentRegistrationsService,
+                //getCoursesService: 'ResultsService.getCourses()',
+                //getResultsService: getResultsService,
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
                         {
@@ -59,43 +60,56 @@
                             name: 'localytics.directives',
                             files: ['css/plugins/chosen/chosen.css',
                                     'js/plugins/chosen/chosen.jquery.js',
-                                    'js/plugins/chosen/chosen.js']
+                                    'js/plugins/chosen/chosen.js'
+                                   ]
                         }]);
                 }
-            }};
+            }
+        };
 
-        var progress = {
-            name: 'index.progress',
+        var enrolments = {
+            name: 'index.enrolments',
             parent: 'index',
-            url: "/progress",
-            controller: 'PRController',
-            controllerAs: 'progress',
-            templateUrl: "views/progress.html",
-            data: { pageTitle: 'Progress',
-                    requiresLogin: true},
-            resolve: {
-                getResultsService: getResultsService,
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            files: ['js/plugins/chartJs/Chart.min.js']
-                        },
-                        {
-                            name: 'angles',
-                            files: ['js/plugins/chartJs/angles.js']
-                        }]);
-                }
-            }};
+            url: '/enrolments',
+            controller: 'EnrolmentsController',
+            controllerAs: 'enrolments',
+            templateUrl: 'js/enrolments/enrolments.html',
+            data: { pageTitle: 'الحجز المبدئي',
+                    requiresLogin: false}
+        };
 
-        var enrolment = {
-            name: 'index.enrolment',
-            parent: 'index',
-            url: "/enrolment",
-            controller: 'EnrolmentController',
-            controllerAs: 'enrolment',
-            templateUrl: "views/enrolment.html",
-            data: { pageTitle: 'Enrolment',
-                    requiresLogin: true}
+        // var progress = {
+        //     name: 'index.progress',
+        //     parent: 'index',
+        //     url: "/progress",
+        //     controller: 'PRController',
+        //     controllerAs: 'progress',
+        //     templateUrl: "views/progress.html",
+        //     data: { pageTitle: 'Progress',
+        //             requiresLogin: true},
+        //     resolve: {
+        //         getResultsService: getResultsService,
+        //         loadPlugin: function ($ocLazyLoad) {
+        //             return $ocLazyLoad.load([
+        //                 {
+        //                     files: ['js/plugins/chartJs/Chart.min.js']
+        //                 },
+        //                 {
+        //                     name: 'angles',
+        //                     files: ['js/plugins/chartJs/angles.js']
+        //                 }]);
+        //         }
+        //     }};
+
+        // var enrolment = {
+        //     name: 'index.enrolment',
+        //     parent: 'index',
+        //     url: "/enrolment",
+        //     controller: 'EnrolmentController',
+        //     controllerAs: 'enrolment',
+        //     templateUrl: "views/enrolment.html",
+        //     data: { pageTitle: 'Enrolment',
+        //             requiresLogin: true}
             // resolve: {
             //     EnrolmentsService: EnrolmentService,
             // }
@@ -109,16 +123,16 @@
             //                 files: ['js/plugins/chartJs/angles.js']
             //             }]);
             //     }}
-        };
+        //};
 
-        var courses = {
-            name: 'index.courses',
-            parent: 'index',
-            url: '/courses',
-            controller: 'CoursesController',
-            controllerAs: 'courses',
-            templateUrl: "js/main/employee/courses.html"
-        };
+        // var courses = {
+        //     name: 'index.courses',
+        //     parent: 'index',
+        //     url: '/courses',
+        //     controller: 'CoursesController',
+        //     controllerAs: 'courses',
+        //     templateUrl: "js/main/employee/courses.html"
+        // };
 
         //MainUserService.$inject = ['MainService'];
 
@@ -138,28 +152,39 @@
         //     getEnrolmentService: getEnrolmentsService
         // };
 
-        getEnrolmentsService.$inject = ['EnrolmentsService',
+        getEnrolmentsService.$inject = ['ResultsService',
                                         'MainUserService'];
-        function getEnrolmentsService(EnrolmentsService,
-                                      MainUserService) {
-//            var StudentID = MainService.getStudentID();
-            return EnrolmentsService.getEnrolments(
-                MainUserService.profile.student_id);
-        }
+        function getEnrolmentsService(ResultsService,
+                                   MainUserService) {
+            // //            var StudentID = MainService.getStudentID();
+            // console.log(ResultsService.getResults(
+            //     MainUserService.profile.registrationNumber));
+            console.log(ResultsService);
+            return ResultsService.getEnrolments(
+                MainUserService.profile.id);
+        };
+        getStudentRegistrationsService.$inject = ['ResultsService',
+                                                  'MainUserService'];
+        function getStudentRegistrationsService(ResultsService,
+                                                MainUserService) {
+            return ResultsService.getStudentRegistrations(
+                MainUserService.profile.id);
+        };
 
-        getResultsService.$inject = ['ResultsService', 'MainUserService'];
-        function getResultsService(ResultsService, MainUserService) {
-            return ResultsService.getResults(
-                MainUserService.profile.student_id);
-        }
 
-        ProgressService.$inject = ['Progress', 'MainUserService'];
-        //, 'MainService'];
-        function ProgressService(Progress, MainUserService){//, MainService) {
-            //            return MainService.getUser().then(
-            //function(data) {
-            return Progress.getProgress(MainUserService.profile.student_id);
-        }
+//         getResultsService.$inject = ['ResultsService', 'MainUserService'];
+//         function getResultsService(ResultsService, MainUserService) {
+//             return ResultsService.getResults(
+//                 MainUserService.profile.student_id);
+//         }
+
+//         ProgressService.$inject = ['Progress', 'MainUserService'];
+//         //, 'MainService'];
+//         function ProgressService(Progress, MainUserService){//, MainService) {
+//             //            return MainService.getUser().then(
+//             //function(data) {
+//             return Progress.getProgress(MainUserService.profile.student_id);
+//         }
 
         // EnrolmentsService.$inject = ['Enrolments', 'MainUserService'];
         // function EnrolmentsService(Enrolments){
@@ -170,10 +195,12 @@
         $stateProvider
             .state(index)
             .state(home)
-            .state(progress)
             .state(results)
-            .state(enrolment)
-            .state(courses);
-    }
+            .state(enrolments);
+            // .state(progress)
+
+            // .state(enrolment)
+            // .state(courses);
+    };
 
 })();

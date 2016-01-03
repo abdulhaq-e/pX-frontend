@@ -9,24 +9,43 @@
                                'store',
                                '$state',
                                'jwtHelper',
-                               'Users'
+                               'API'
                               ];
 
     function MainUserService($http, store, $state,
-                         jwtHelper, Users) {
+                         jwtHelper, API) {
 
         var service = getUser();
 
         return service;
 
         function getUser() {
-            var token = store.get('jwt');
-            var decodedToken = jwtHelper.decodeToken(token);
-            var userID = decodedToken.user_id;
+            //var token = store.get('jwt');
+            //var decodedToken = jwtHelper.decodeToken(token);
+            //var userID = decodedToken.user_id;
             //var token = tokenData.token;
             //var userID = store.get('userID');
             //return decodedToken;
-            return Users.one(userID).get();
+            //console.log(API);
+            return API.mem.find(
+                'user',
+                '5fe56a64-b839-4310-8950-783af33eb3a4'
+            ).then(
+                function(user) {
+                    //console.log(user);
+                    //if (user.profileType == 'student') {
+                    return API.mem.find(
+                        user.profileType,
+                        user.profileId
+                    ).then(
+                        function(profile) {
+                            //console.log(profile);
+                            //console.log(user);
+                            user.profile = profile;
+                            console.log(API.mem);
+                            return user;
+                        });
+                });
 
             // if (userID.profile_type == 'student') {
             //     // console.log(Students.one(userID.profile_id).getList('get_results/'));

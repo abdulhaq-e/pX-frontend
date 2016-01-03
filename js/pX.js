@@ -7,13 +7,12 @@
             'angular-jwt',
             'ui.bootstrap',                 // Ui Bootstrap
             'oc.lazyLoad',
-            'restangular',
             'pX.api',
             'pX.config',
-            'pX.tempResults'
+            //'pX.tempResults',
             // 'pX.auth',
             // 'pX.config',
-            // 'pX.main',
+            'pX.main',
             // 'pX.employee'
         ]);
 
