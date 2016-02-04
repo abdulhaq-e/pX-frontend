@@ -1,0 +1,12 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: blue;
+
+h1 {
+  font: 100% $font-stack;
+  color: $primary-color;
+  //background-color: red;
+}
+
+/* h1 { */
+/*   color: red; */
+/* } */

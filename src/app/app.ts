@@ -5,53 +5,71 @@ import {Component} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
-import {Home} from './home/home';
+import {RouterActive} from './directives/router-active';
 
-/*
- * App Component
- * Top Level Component
- */
+import {Home} from './home/home';
+import {CoursesComponent} from './courses/courses.component';
+
 @Component({
   selector: 'app',
   providers: [ ...FORM_PROVIDERS ],
-  directives: [ ...ROUTER_DIRECTIVES ],
+  directives: [ ...ROUTER_DIRECTIVES, RouterActive ],
   pipes: [],
-  styles: [],
+  // styles: [require('../assets/css/semantic.min.css')],
   template: `
+  <div class="container-fluid">
+  <div class="row">
+  <div class="col-md-3">
     <header>
       <nav>
-        <h1>Hello {{ name }}</h1>
-        <a [routerLink]=" ['Index'] ">Index</a>
-        <a [routerLink]=" ['Home'] ">Home</a>
+        <ul>
+          <li router-active>
+            <a [routerLink]=" ['Home'] ">Home</a>
+          </li>
+          <li router-active>
+            <a [routerLink]=" ['Courses'] ">Courses</a>
+          </li>
+          <li router-active>
+            <a [routerLink]=" ['About'] ">About</a>
+          </li>
+        </ul>
       </nav>
     </header>
-
+  </div>
+  <div class="col-md-6">
     <main>
       <router-outlet></router-outlet>
     </main>
 
-    <footer>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
-    </footer>
+    </div>
+  <div class="col-md-3">
+  what should be here
+  </div>
+  </div>
+  </div>
   `
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Index' },
-  { path: '/home', component: Home, name: 'Home' }
+    {
+        path: '/',
+        component: Home,
+        name: 'Home',
+        useAsDefault: true
+    },
+    {
+        path: '/courses/...',
+        component: CoursesComponent,
+        name: 'Courses'
+    },
+    // Async load a component using Webpack's require with es6-promise-loader
+    { path: '/about', loader: () => require('./about/about')('About'), name: 'About' },
+    { path: '/**',
+      redirectTo: ['Home']
+    }
 ])
 export class App {
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
-  constructor() {
+
+    constructor() {
 
   }
 }
-
-/*
- * Please review the https://github.com/AngularClass/angular2-examples/ repo for
- * more angular app examples that you may copy/paste
- * (The examples may not be updated as quickly. Please open an issue on github for us to update it)
- * For help or questions please contact us at @AngularClass on twitter
- * or our chat on Slack at https://AngularClass.com/slack-join
- * or via chat on Gitter at https://gitter.im/AngularClass/angular2-webpack-starter
- */

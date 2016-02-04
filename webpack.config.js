@@ -4,19 +4,16 @@
  * Helper: root(), and rootDir() are defined at the bottom
  */
 var path = require('path');
-// Webpack Plugins
-var ProvidePlugin = require('webpack/lib/ProvidePlugin');
-var DefinePlugin  = require('webpack/lib/DefinePlugin');
-var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-var CopyWebpackPlugin  = require('copy-webpack-plugin');
-var HtmlWebpackPlugin  = require('html-webpack-plugin');
+var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 var metadata = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'pX',
   baseUrl: '/',
-  host: '0.0.0.0',
-  port: 3000,
+  host: 'localhost',
+  port: 3030,
   ENV: ENV
 };
 /*
@@ -29,9 +26,10 @@ module.exports = {
   devtool: 'source-map',
   debug: true,
 
+  // our angular app
   entry: {
-    'vendor': './src/vendor.ts',
-    'main': './src/main.ts' // our angular app
+    'polyfills': './src/polyfills.ts',
+    'main': './src/main.ts'
   },
 
   // Config for our build files
@@ -44,48 +42,84 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['','.ts','.js','.json','.css','.html']
+    extensions: prepend(['.ts', '.js', '.json', '.css', '.html'], '.async'),
+    // TODO(gdi2290): remove after beta.2 release
+    alias: {
+      'node_modules/angular2/src/compiler/template_compiler.js': 'src/.ng2-patch/template_compiler.js'
+    }
   },
 
   module: {
-    preLoaders: [{ test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }],
+    preLoaders: [
+      // { test: /\.ts$/, loader: 'tslint-loader', exclude: [ root('node_modules') ] },
+      // TODO(gdi2290): `exclude: [ root('node_modules/rxjs') ]` fixed with rxjs 5 beta.2 release
+      {
+        test: /\.js$/,
+        loader: "source-map-loader",
+        exclude: [root('node_modules/rxjs')]
+      }
+    ],
     loaders: [
+      // Support Angular 2 async routes via .async.ts
+      {
+        test: /\.async\.ts$/,
+        loaders: ['es6-promise-loader', 'ts-loader'],
+        exclude: [/\.(spec|e2e)\.ts$/]
+      },
+
       // Support for .ts files.
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        query: {
-          'ignoreDiagnostics': [
-            2403, // 2403 -> Subsequent variable declarations
-            2300, // 2300 -> Duplicate identifier
-            2374, // 2374 -> Duplicate number index signature
-            2375  // 2375 -> Duplicate string index signature
-          ]
-        },
-        exclude: [ /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/ ]
+        exclude: [/\.(spec|e2e|async)\.ts$/]
       },
 
       // Support for *.json files.
-      { test: /\.json$/,  loader: 'json-loader' },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
 
       // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'raw-loader' },
+      {
+        test: /\.css$/,
+        loader: 'raw-loader'
+      },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      {
+        test: /\.html$/,
+        loader: 'raw-loader'
+      },
+
+      {
+        test: /\.scss$/,
+        loader: 'raw!sass',
+        exclude: [root('node_modules')]
+      }
 
       // if you add a loader include the resolve file extension above
     ]
   },
-
   plugins: [
-    new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js', minChunks: Infinity }),
+    new webpack.optimize.OccurenceOrderPlugin(true),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'polyfills',
+      filename: 'polyfills.bundle.js',
+      minChunks: Infinity
+    }),
     // static assets
-    new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ]),
+    new CopyWebpackPlugin([{
+      from: 'src/assets',
+      to: 'assets'
+    }]),
     // generating html
-    new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: false
+    }),
     // replace
-    new DefinePlugin({
+    new webpack.DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV)
@@ -96,17 +130,29 @@ module.exports = {
   // Other module loader config
   tslint: {
     emitErrors: false,
-    failOnHint: false
+    failOnHint: false,
+    resourcePath: 'src'
   },
   // our Webpack Development Server config
   devServer: {
     port: metadata.port,
     host: metadata.host,
+    // contentBase: 'src/',
     historyApiFallback: true,
-    watchOptions: { aggregateTimeout: 300, poll: 1000 }
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
+    }
   },
   // we need this due to problems with es6-shim
-  node: {global: 'window', progress: false, crypto: 'empty', module: false, clearImmediate: false, setImmediate: false}
+  node: {
+    global: 'window',
+    progress: false,
+    crypto: 'empty',
+    module: false,
+    clearImmediate: false,
+    setImmediate: false
+  }
 };
 
 // Helper functions
@@ -114,6 +160,18 @@ module.exports = {
 function root(args) {
   args = Array.prototype.slice.call(arguments, 0);
   return path.join.apply(path, [__dirname].concat(args));
+}
+
+function prepend(extensions, args) {
+  args = args || [];
+  if (!Array.isArray(args)) {
+    args = [args]
+  }
+  return extensions.reduce(function(memo, val) {
+    return memo.concat(val, args.map(function(prefix) {
+      return prefix + val
+    }));
+  }, ['']);
 }
 
 function rootNode(args) {
