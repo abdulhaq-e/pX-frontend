@@ -1,12 +1,12 @@
 // @AngularClass
 
 exports.config = {
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: 'http://localhost:3030/',
 
   // use `npm run e2e`
   specs: [
-     'src/**/**.e2e.ts',
-     'src/**/*.e2e.ts'
+    'src/**/**.e2e.ts',
+    'src/**/*.e2e.ts'
   ],
   exclude: [],
 
