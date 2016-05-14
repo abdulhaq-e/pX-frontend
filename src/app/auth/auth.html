@@ -1,0 +1,38 @@
+<md-card>
+  <md-card-title>تسجيل الدخول</md-card-title>
+  <form [ngFormModel]="form"
+  (ngSubmit)="login('whatever')"
+  class="ui form">
+  <div class="field"
+    [class.error]="!username.valid && username.touched && username.value">
+    <label for="username">اسم المستخدم</label>
+    <input type="text"
+            name="username"
+            id="username"
+            [ngFormControl]="username">
+  </div>
+  <!-- <div *ngIf="!username.valid && username.touched && username.value"
+  class="ui red message">
+  اسم المستخدم غير صحيح
+</div> -->
+<div *ngIf="username.hasError('required') && username.value"
+class="ui red message">
+  يلزم عليك إدخال اسم المستخدم!
+</div>
+<div *ngIf="username.hasError('invalidRegNumber') && username.value"
+class="ui red message">
+اسم المستخدم غير صحيح (رقم القيد يبدأ بصفر!!!)
+</div>
+  <div class="field">
+    <label for="password">كلمة السر</label>
+    <input type="password"
+            name="password"
+            id="password"
+            [ngFormControl]="password">
+  </div>
+  <input type="submit" class="ui button" value="دخول" [disabled]="!form.valid">
+  <div class="">
+</div>
+</form>
+{{ auth | async | json }}
+</md-card>

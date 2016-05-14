@@ -1,0 +1,8 @@
+<div>
+  <button (click)="onHourBack()">Hour -1</button>
+  <button (click)="onHourForward()">Hour +1</button>
+  <div></div>
+  <button (click)="onDayBack()">Day -1</button>
+  <button (click)="onDayForward()">Day +1</button>
+  {{clock | async | date:'yMMMMEEEEdjms'}}
+</div>

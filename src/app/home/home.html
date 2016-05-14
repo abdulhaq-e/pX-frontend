@@ -1,11 +1,8 @@
 <div>
-  <span x-large>Your Content Here</span>
-  <input type="text" [value]="data.value" (input)="data.value = $event.target.value" autofocus>
-  <!--
-    Rather than wiring up two-way data-binding ourselves
-    we can use Angular's [(ngModel)] syntax
-    <input type="text" [(ngModel)]="data.value">
-  -->
-
-  <pre>this.title = {{ data | json }}</pre>
+  <div class="">
+    Current Count: {{ count | async }}
+  </div>
+<button type="button" name="button" (click)="increment()">Increment</button>
+<button type="button" name="button" (click)="decrement()">Decrement</button>
+<button type="button" name="button" (click)="reset()">Reset</button>
 </div>

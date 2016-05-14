@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {RouterLink} from '@angular/router';
 
 import {PeriodsService} from '../periods/periods.service';
 import {PeriodsSelectorComponent} from '../periods/periods-selector.component';
