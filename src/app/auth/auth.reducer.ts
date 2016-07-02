@@ -1,4 +1,4 @@
-import {Action, Reducer} from '@ngrx/store';
+import {Action, ActionReducer} from '@ngrx/store';
 
 export const AUTH_ACTIONS_TYPE = {
   AUTH_REQUEST: 'AUTH_REQUEST',
@@ -12,7 +12,7 @@ export var AUTH_INITIAL_STATE = {
   error: null
 };
 
-export const authReducer: Reducer<any> = (state: any = AUTH_INITIAL_STATE, action: Action) => {
+export const authReducer: ActionReducer<any> = (state: any = AUTH_INITIAL_STATE, action: Action) => {
 
     switch (action.type) {
         // case AUTH_ACTIONS_TYPE.AUTH_INIT:

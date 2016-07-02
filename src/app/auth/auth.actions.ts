@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 
 import { AUTH_ACTIONS_TYPE } from './auth.reducer';
-import { AppStore } from '../app.interface';
+import { AppStore } from '../app/app.interface';
 
 
 @Injectable()

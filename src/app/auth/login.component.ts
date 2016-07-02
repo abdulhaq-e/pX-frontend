@@ -7,7 +7,7 @@ AbstractControl,
 Validators,
 } from '@angular/common';
 
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { AuthActions } from './auth.actions';
 import {AuthComponent} from './auth.component'
 
 import {Store} from '@ngrx/store';
-import {AppStore} from '../app.interface';
+import {AppStore} from '../app/app.interface';
 
 
 // import {JwtHelper, tokenNotExpired} from 'angular2-jwt/angular2-jwt';

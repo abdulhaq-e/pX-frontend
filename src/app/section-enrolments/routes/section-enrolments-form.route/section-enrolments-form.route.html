@@ -1,0 +1,17 @@
+<!-- <div class="">
+  <md-card>
+    <input type="text" name="name" value="" #i>
+    <md-card-actions>
+      <button (click)="saveGradeAction$.next(i.target.value)" md-raised-button color="primary">
+        Update
+      </button>
+    </md-card-actions>
+  </md-card>
+</div> -->
+<div class="">
+  <section-enrolments-form
+  [enrolments]="enrolments"
+  (gradeChanged)="saveGradeAction$.next($event)"
+  >
+  </section-enrolments-form>
+</div>

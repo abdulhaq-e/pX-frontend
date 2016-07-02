@@ -3,14 +3,14 @@ import {Component, ChangeDetectionStrategy, EventEmitter
 import { FORM_DIRECTIVES, FormBuilder, ControlGroup,
   AbstractControl, Validators} from '@angular/common';
 
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import { AuthActions } from './auth.actions';
 
 import {Store} from '@ngrx/store';
-import {AppStore} from '../app.interface';
+import {AppStore} from '../app/app.interface';
 
 import {
 registrationNumberValidator
@@ -34,7 +34,6 @@ export class AuthComponent {
   constructor(
     public fb: FormBuilder,
     public auth_actions: AuthActions,
-    public router: Router,
     public store: Store<AppStore>
   ) {
     console.log(localStorage);

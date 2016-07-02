@@ -1,7 +1,3 @@
-/**
- * @author: @AngularClass
- */
-
 const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
@@ -13,7 +9,6 @@ const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 
 /**
@@ -154,17 +149,10 @@ module.exports = webpackMerge(commonConfig, {
       // }, // debug
       // comments: true, //debug
 
+
       beautify: false, //prod
-
-      mangle: {
-        screw_ie8 : true,
-        keep_fnames: true
-      }, //prod
-
-      compress: {
-        screw_ie8: true
-      }, //prod
-
+      mangle: { screw_ie8 : true }, //prod
+      compress: { screw_ie8: true }, //prod
       comments: false //prod
     }),
 
@@ -175,10 +163,11 @@ module.exports = webpackMerge(commonConfig, {
      *
      * See: https://github.com/webpack/compression-webpack-plugin
      */
-    new CompressionPlugin({
-      regExp: /\.css$|\.html$|\.js$|\.map$/,
-      threshold: 2 * 1024
-    })
+    //  install compression-webpack-plugin
+    // new CompressionPlugin({
+    //   regExp: /\.css$|\.html$|\.js$|\.map$/,
+    //   threshold: 2 * 1024
+    // })
 
   ],
 

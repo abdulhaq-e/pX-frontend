@@ -13,7 +13,8 @@
  */
 Error.stackTraceLimit = Infinity;
 
-require('core-js');
+require('core-js/es6');
+require('core-js/es7/reflect');
 
 // Typescript emit helpers polyfill
 require('ts-helpers');
@@ -22,13 +23,8 @@ require('zone.js/dist/zone');
 require('zone.js/dist/long-stack-trace-zone');
 require('zone.js/dist/jasmine-patch');
 require('zone.js/dist/async-test');
+require('zone.js/dist/fake-async-test');
 
-require('@ngrx/store');
-
-require('deep-freeze');
-
-// RxJS
-require('rxjs/Rx');
 
 var testing = require('@angular/core/testing');
 var browser = require('@angular/platform-browser-dynamic/testing');
@@ -38,10 +34,22 @@ testing.setBaseTestProviders(
   browser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
 );
 
-Object.assign(global, testing);
+//
+// require('@ngrx/store');
+//
+// require('deep-freeze');
+
+// RxJS
+require('rxjs/Rx');
+// require('rxjs/add/operator/map');
+// require('rxjs/add/operator/mergeMap');
+// require('rxjs/add/operator/filter');
+// require('rxjs/add/operator/merge');
+require('@ngrx/core/add/operator/select');
+// require('rxjs/add/operator/of');
 
 /*
- * Ok, this is kinda crazy. We can use the the context method on
+ * Ok, this is kindna crazy. We can use the the context method on
  * require that webpack created in order to tell webpack
  * what files we actually want to require or import.
  * Below, context will be an function/object with file names as keys.

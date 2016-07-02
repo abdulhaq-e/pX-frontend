@@ -22,6 +22,7 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
  */
 module.exports = {
 
+  cache: false,
   /**
    * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
    *
@@ -36,7 +37,7 @@ module.exports = {
    * See: http://webpack.github.io/docs/configuration.html#resolve
    */
   resolve: {
-
+    cache: false,
     /**
      * An array of extensions that should be used to resolve modules.
      *
@@ -89,7 +90,10 @@ module.exports = {
         // these packages have problems with their sourcemaps
         helpers.root('node_modules/rxjs'),
         helpers.root('node_modules/@angular2-material'),
-        helpers.root('node_modules/@angular')
+        helpers.root('node_modules/@angular'),
+        helpers.root('node_modules/@ngrx/router'),
+        helpers.root('node_modules/@ngrx/core'),
+        helpers.root('node_modules/@ngrx/effects')
       ]}
 
     ],
@@ -112,6 +116,7 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'awesome-typescript-loader',
+        // loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
         query: {
           compilerOptions: {
 
@@ -137,7 +142,7 @@ module.exports = {
        *
        * See: https://github.com/webpack/raw-loader
        */
-      { test: /\.css$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')] },
+      { test: /\.css$/, loaders: ['to-string-loader', 'css-loader'], exclude: [helpers.root('src/index.html')] },
 
       /**
        * Raw loader support for *.html

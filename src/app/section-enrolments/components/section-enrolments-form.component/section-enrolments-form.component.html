@@ -1,0 +1,24 @@
+<md-card>
+<div style="width: 1000px;">
+
+    <ag-grid-ng2 #agGrid style="width: 100%; height: 350px;" class="ag-material"
+       [gridOptions]="gridOptions"
+       [columnDefs]="columnDefs"
+       [rowData]="enrolments"
+       enableColResize
+       enableSorting
+       enableFilter
+       groupHeaders
+       suppressRowClickSelection
+       toolPanelSuppressGroups
+       toolPanelSuppressValues
+       debug
+       rowHeight="22"
+       rowSelection="multiple"
+       (cellValueChanged)="gradeCellChanged($event)">
+  </ag-grid-ng2>
+</div>
+</md-card>
+<div>
+{{enrolments}}
+</div>
